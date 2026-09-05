@@ -1,0 +1,9 @@
+# Syside workspace configuration.
+#
+# The SYSMOD library is external reference material and is not part of this
+# repository. It is loaded as an external library so that it is available for
+# resolution but is not validated together with the product model.
+# The remaining reference material is excluded from the workspace.
+# See references/README.md.
+include = ["references/sysmod-sysmlv2-main/SYSMOD.sysml"]
+exclude = ["references/**"]

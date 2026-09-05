@@ -97,6 +97,8 @@ Define each need using `ExtendedConcern`, include the need sentence as documenta
 #extendedConcern concern def <NeedName> {
     doc /* <stakeholder> needs <outcome> so that <purpose>. */
 
+    subject systemOfInterest;
+
     stakeholder <role> : <StakeholderDefinition>;
 
     attribute :>> priority = LevelKind::<level>;
@@ -120,8 +122,13 @@ Each need declares its stakeholder. The SYSMOD delivery-drone example does not m
 Source: OMG SysML v2 Specification, Section 7.21.3
 ```
 
-**No subject yet.**
-The system of interest is established during activity 2, so stakeholder needs do not declare a subject at this stage.
+**Subject declared but not yet determined.**
+The system of interest is established during activity 2, so stakeholder needs do not identify a system at this stage. The subject parameter is nevertheless declared, without a type and without a binding, because a concern definition that declares a stakeholder must declare its subject as the first parameter. Activity 2 gives the subject its type and value.
+
+```text
+Source: OMG SysML v2 Specification, Section 7.21.2 "Requirement Definitions and Usages"
+Source: Syside rule requirement-definition-subject-parameter-position
+```
 
 **No contact information.**
 Stakeholders are modeled as roles rather than named people.
