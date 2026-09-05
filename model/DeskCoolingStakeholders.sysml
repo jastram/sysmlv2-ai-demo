@@ -49,7 +49,7 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
      *
      * Result of activity 1 "Stakeholders and Needs".
      * Needs describe desired outcomes, not solutions. They are not yet
-     * verifiable and carry no subject at this stage.
+     * verifiable, and their subject is declared but not yet determined.
      * See method/02-stakeholders-and-needs.md.
      */
 

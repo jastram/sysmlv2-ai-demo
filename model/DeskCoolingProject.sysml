@@ -26,8 +26,9 @@ package <DCD> DeskCooling {
         //------------------------- Stakeholder Needs
         concern :>> stakeholderNeeds {
             doc
-            /* The needs carry no subject yet. The system of interest is
-             * established in activity 2 "System Context and Use Cases". */
+            /* The subject of the needs is declared but not yet determined. The
+             * system of interest is established in activity 2 "System Context
+             * and Use Cases", which gives the subject its type and value. */
 
             concern thermalRelief : ThermalRelief;
             concern comfortWithoutAttention : ComfortWithoutAttention;

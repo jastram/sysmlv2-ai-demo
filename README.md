@@ -25,6 +25,20 @@ of the initial problem definition.
 Regulatory engineering and product certification are outside the scope
 of this demonstration.
 
+## Generated Views
+
+The SysML v2 model in [`model/`](model/) is the single source of truth. Readable
+views are generated from it and are never edited by hand.
+
+```bash
+python tools/render-needs.py
+python tools/render-stakeholders.py
+```
+
+The first writes the stakeholder needs table to `build/stakeholder-needs.md`,
+the second the stakeholder table to `build/stakeholders.md`. The `build/`
+directory is generated and not tracked in Git.
+
 ## License
 
 This repository is licensed under the MIT License.

@@ -1,2 +1,15 @@
+# External reference material, see references/README.md
 references/*
 !references/README.md
+
+# Generated views, see tools/
+build/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Tool logs, e.g. the Syside log file
+*.log
