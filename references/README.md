@@ -54,21 +54,43 @@ Methodological suitability must not be inferred from language validity or tool s
 
 ## Reference Access
 
-Large or licensed reference material should normally remain outside this repository.
+Reference material is accessed in one of two ways, depending on whether it can be
+redistributed and whether pinning an exact revision matters.
 
-Local references should be accessible through a configurable reference root rather than machine-specific absolute paths. For example:
+### Tracked References: Git Submodules
+
+Public Git repositories that the model depends on are included as Git submodules.
+The submodule records the exact upstream revision, so the model resolves against a
+known version of its library rather than whatever happens to be on disk.
+
+This directory currently contains one submodule:
+
+| Path | Upstream |
+| --- | --- |
+| `sysmod-sysmlv2/` | <https://github.com/MBSE4U/sysmod-sysmlv2> |
+
+The contents of a submodule are not stored in this repository; only its URL and the
+pinned commit are. Everything else under `references/` is ignored by Git.
+
+Setup and update commands are documented in the [root README](../README.md#reference-material).
+
+### Untracked References: Reference Root
+
+Large or licensed reference material must remain outside this repository and is not
+tracked in any form.
+
+Local references should be accessible through a configurable reference root rather
+than machine-specific absolute paths. For example:
 
 ```text
 $SYSML_KNOWLEDGE/
-├── sysmod/
 ├── sysml-v2-book/
 ├── sysml-v2-specification/
 └── syside/
 ```
 
-AI agents working on this repository should be given read access to this location when reference material is required.
-
-Public Git repositories may alternatively be included as Git submodules when pinning the exact source revision is useful for reproducibility.
+AI agents working on this repository should be given read access to this location
+when reference material is required.
 
 ## Reference Manifest
 
@@ -81,17 +103,29 @@ For each reference used by the project, record:
 * local location or public source;
 * licensing restrictions where relevant.
 
-Example:
-
-```markdown
 ### SYSMOD for SysML v2
 
 - Category: Methodology
 - Author: Tim Weilkiens / MBSE4U
-- Version: <Git revision>
-- Location: `$SYSML_KNOWLEDGE/sysmod/`
-- Public source: <repository URL>
-```
+- Version: pinned by the Git submodule; see `git submodule status`
+- Location: `references/sysmod-sysmlv2/` (Git submodule)
+- Public source: <https://github.com/MBSE4U/sysmod-sysmlv2>
+- Copyright: MBSE4U, Tim Weilkiens
+- License: Apache License 2.0 (referenced as a submodule, not redistributed)
+
+### The SysML v2 Book
+
+- Category: Methodology
+- Author: Tim Weilkiens
+- Location: reference root, e.g. `$SYSML_KNOWLEDGE/sysml-v2-book/`
+- License: licensed material, must not be redistributed with this repository
+
+### OMG SysML v2 Specification
+
+- Category: Language
+- Author: Object Management Group
+- Location: reference root, e.g. `$SYSML_KNOWLEDGE/sysml-v2-specification/`
+- Public source: <https://www.omg.org/spec/SysML/>
 
 ## Use by AI Agents
 

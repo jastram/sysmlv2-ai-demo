@@ -1,0 +1,4 @@
+[submodule "references/sysmod-sysmlv2"]
+	path = references/sysmod-sysmlv2
+	url = https://github.com/MBSE4U/sysmod-sysmlv2.git
+	branch = main

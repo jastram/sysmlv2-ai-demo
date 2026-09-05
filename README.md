@@ -25,6 +25,64 @@ of the initial problem definition.
 Regulatory engineering and product certification are outside the scope
 of this demonstration.
 
+## Getting Started
+
+### Clone
+
+This repository uses a Git submodule for the SYSMOD library, so clone it
+recursively:
+
+```bash
+git clone --recurse-submodules git@github.com:jastram/sysmlv2-ai-demo.git
+```
+
+If the repository was already cloned without that flag, the
+`references/sysmod-sysmlv2/` directory will be empty. Populate it with:
+
+```bash
+git submodule update --init --recursive
+```
+
+### Reference Material
+
+External reference material lives in [`references/`](references/) and is, with one
+exception, not tracked in this repository. See
+[`references/README.md`](references/README.md) for the full reference manifest.
+
+The exception is the SYSMOD library, which the model actually depends on:
+
+| Reference | Access |
+| --- | --- |
+| SYSMOD for SysML v2 | Git submodule at `references/sysmod-sysmlv2/`, pinned to an upstream revision |
+| The SysML v2 Book | Licensed; keep outside the repository |
+| OMG SysML v2 Specification | Obtain separately; keep outside the repository |
+
+The submodule is pinned to a specific upstream commit so that the model always
+resolves against a known version of the library. To move it to the latest upstream
+`main` and record the new revision:
+
+```bash
+git submodule update --remote references/sysmod-sysmlv2
+git add references/sysmod-sysmlv2
+git commit -m "Update SYSMOD library"
+```
+
+Check the currently pinned revision at any time with:
+
+```bash
+git submodule status
+```
+
+The SYSMOD library is Copyright MBSE4U, Tim Weilkiens, and licensed under the
+Apache License 2.0. It is referenced, not redistributed: this repository stores
+only the upstream URL and commit, and the submodule must not be modified locally.
+
+### Validation
+
+[`syside.toml`](syside.toml) loads `references/sysmod-sysmlv2/SYSMOD.sysml` as an
+external library, so the submodule must be initialized before the model in
+[`model/`](model/) will resolve.
+
 ## Generated Views
 
 The SysML v2 model in [`model/`](model/) is the single source of truth. Readable

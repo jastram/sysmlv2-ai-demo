@@ -1,6 +1,8 @@
 # External reference material, see references/README.md
 references/*
 !references/README.md
+# The SYSMOD library is tracked as a Git submodule, not ignored
+!references/sysmod-sysmlv2
 
 # Generated views, see tools/
 build/
