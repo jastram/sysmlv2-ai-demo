@@ -109,8 +109,9 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
 
     #extendedConcern concern def PrivacyOfPeopleNearby {
         doc
-        /* People near the system need it not to expose information about them
-         * or their workplace so that they can work without feeling observed. */
+        /* People near the system need it to keep information about them and
+         * their workplace private so that they can work with a sense of
+         * privacy. */
 
         subject systemOfInterest;
 
