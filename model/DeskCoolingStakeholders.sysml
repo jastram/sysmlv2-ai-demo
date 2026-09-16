@@ -3,7 +3,7 @@ package <DCD_STAKEHOLDERS> DeskCoolingStakeholders {
     /* Stakeholders of the intelligent desk cooling device.
      *
      * Result of activity 1 "Problem, Stakeholders and Needs".
-     * See method/02-problem-stakeholders-and-needs.md.
+     * See method/01-problem-stakeholders-and-needs.md.
      */
 
     private import SYSMOD::*;
@@ -51,7 +51,7 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
      * Needs describe desired outcomes, not solutions. They are not yet
      * verifiable. Activity 2 "System Idea" gave their subject its type;
      * activity 3 gives it its value.
-     * See method/02-problem-stakeholders-and-needs.md.
+     * See method/01-problem-stakeholders-and-needs.md.
      */
 
     private import SYSMOD::*;

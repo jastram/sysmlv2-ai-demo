@@ -2,7 +2,7 @@
 
 These helpers are deliberately not a SysML v2 parser. They recognise only the
 modeling conventions used in this repository, as described in
-method/02-problem-stakeholders-and-needs.md, and they never modify the model.
+method/01-problem-stakeholders-and-needs.md, and they never modify the model.
 """
 
 import os
@@ -14,7 +14,7 @@ REPO = Path(__file__).resolve().parent.parent
 
 DOC = re.compile(r"doc\s*/\*(.*?)\*/", re.DOTALL)
 
-# The conventions of this repository, see method/02-problem-stakeholders-and-needs.md.
+# The conventions of this repository, see method/01-problem-stakeholders-and-needs.md.
 CONCERN_DEF = re.compile(r"#extendedConcern\s+concern\s+def\s+(\w+)\s*\{")
 STAKEHOLDER_DEF = re.compile(r"#extendedStakeholder\s+part\s+def\s+(\w+)\s*\{")
 STAKEHOLDER_PARAM = re.compile(r"stakeholder\s+\w+\s*:\s*([\w:]+)\s*;")

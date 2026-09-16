@@ -10,7 +10,7 @@ package <DCD_DECISIONS> DeskCoolingDecisions {
      *
      * Identifiers are assigned once and are never reused. A decision that no
      * longer holds is marked superseded rather than deleted.
-     * See method/01-development-process.md, section "Decisions and Assumptions".
+     * See method/00-development-process.md, section "Decisions and Assumptions".
      */
 
     private import ScalarValues::String;

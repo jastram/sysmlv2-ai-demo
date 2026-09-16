@@ -1,6 +1,6 @@
 # System Context and Use Cases
 
-Guidance for activity 3 of [`01-development-process.md`](01-development-process.md).
+Guidance for activity 3 of [`00-development-process.md`](00-development-process.md).
 
 This activity fixes the system boundary, identifies the external actors, and describes the interactions the system must support. It does not produce system requirements and does not decide how the system works internally.
 
@@ -220,7 +220,7 @@ The needs themselves are not reformulated. Only their subject is determined.
 SYSMOD refines the context along a chain from the brownfield context through the system idea to the specification context. This project develops no brownfield context, so the chain starts at the system idea: the specification context specializes the system idea context, and the specification system specializes the system idea system.
 
 ```text
-Source: 01-development-process.md, tailoring decisions "Project frame is given" and "No brownfield context"
+Source: 00-development-process.md, tailoring decisions "Project frame is given" and "No brownfield context"
 ```
 
 **Black box only.**

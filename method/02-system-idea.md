@@ -1,6 +1,6 @@
 # System Idea
 
-Guidance for activity 2 of [`01-development-process.md`](01-development-process.md).
+Guidance for activity 2 of [`00-development-process.md`](00-development-process.md).
 
 This activity commits to the kind of solution that will be developed, and records the commitment. It does not design the system and it does not produce requirements.
 
@@ -46,7 +46,7 @@ This is the load-bearing output of the activity: it is what makes the context of
 
 ## Decisions
 
-Record every choice that narrows the solution space, following the convention of [`01-development-process.md`](01-development-process.md).
+Record every choice that narrows the solution space, following the convention of [`00-development-process.md`](00-development-process.md).
 
 A decision states:
 
@@ -175,7 +175,7 @@ The problem statement and the needs themselves are not reformulated. Only their 
 SYSMOD develops the system idea as both a black-box context and a white-box `systemIdeaContextImpl` carrying a rough internal structure. This project develops the black box only. For a product this small the rough structure would be the architecture of activity 5, written a step early and with less information. The inherited `systemIdeaContextImpl` usage is left undeveloped, and the `satisfy` relationship to the problem statement that SYSMOD places on the white-box system is placed on the black-box system instead.
 
 **No brownfield context.**
-See the tailoring decision of the same name in [`01-development-process.md`](01-development-process.md). The system idea context does not specialize a brownfield context.
+See the tailoring decision of the same name in [`00-development-process.md`](00-development-process.md). The system idea context does not specialize a brownfield context.
 
 **Minimal actor set.**
 Only actors forced by the commitment are modeled here. SYSMOD permits the system idea to add actors freely; keeping the set minimal keeps the split between this activity and activity 3 checkable.

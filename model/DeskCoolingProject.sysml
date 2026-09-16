@@ -5,7 +5,7 @@ package <DCD> DeskCooling {
      * The project is the shared context that links the engineering artifacts.
      * At this stage it contains the results of activity 1 (problem statement,
      * stakeholders, needs) and activity 2 (system idea). Further artifacts are
-     * added by the later activities of method/01-development-process.md.
+     * added by the later activities of method/00-development-process.md.
      */
 
     private import SYSMOD::*;

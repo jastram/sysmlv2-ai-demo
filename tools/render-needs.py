@@ -6,7 +6,7 @@ writes a generated view; it never modifies the model.
 
 This is deliberately not a SysML v2 parser. It recognises exactly the modeling
 conventions used in this repository, as described in
-method/02-problem-stakeholders-and-needs.md:
+method/01-problem-stakeholders-and-needs.md:
 
     #extendedConcern concern def <NeedName> {
         doc

@@ -1,6 +1,6 @@
 # Problem, Stakeholders and Needs
 
-Guidance for activity 1 of [`01-development-process.md`](01-development-process.md).
+Guidance for activity 1 of [`00-development-process.md`](00-development-process.md).
 
 This activity states the problem the project exists to solve, identifies the relevant stakeholders, and captures their needs. It does not produce system requirements and does not commit to a solution. It is a tailored merge of SYSMOD steps 2, 3 and 4.
 
@@ -181,7 +181,7 @@ Source: Syside rule requirement-definition-subject-parameter-position
 SYSMOD anchors the subject of the problem statement and of the stakeholder needs to the white-box brownfield system. This project develops no brownfield context, so the inherited `brownfieldSystem` subject is bound to the system of interest in activity 2 instead. The library name of the feature is kept.
 
 ```text
-Source: 01-development-process.md, tailoring decision "No brownfield context"
+Source: 00-development-process.md, tailoring decision "No brownfield context"
 ```
 
 **No contact information.**

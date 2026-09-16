@@ -18,7 +18,7 @@ principle.
 
 The development starts from the problem and the stakeholder needs. It does
 not assume a technical solution: the kind of solution is committed to in
-activity 2 of [`method/01-development-process.md`](method/01-development-process.md),
+activity 2 of [`method/00-development-process.md`](method/00-development-process.md),
 as an explicit and recorded decision, because the system boundary cannot be
 drawn without one. That commitment is a USB-powered tabletop fan. Everything
 inside it — how the airflow is produced, directed, and controlled — remains a
