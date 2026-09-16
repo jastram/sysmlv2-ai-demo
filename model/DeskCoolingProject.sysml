@@ -4,8 +4,9 @@ package <DCD> DeskCooling {
      *
      * The project is the shared context that links the engineering artifacts.
      * At this stage it contains the results of activity 1 (problem statement,
-     * stakeholders, needs) and activity 2 (system idea). Further artifacts are
-     * added by the later activities of method/00-development-process.md.
+     * stakeholders, needs), activity 2 (system idea) and activity 3
+     * (specification context and use cases). Further artifacts are added by
+     * the later activities of method/00-development-process.md.
      */
 
     private import SYSMOD::*;
@@ -45,20 +46,34 @@ package <DCD> DeskCooling {
         //------------------------- Stakeholder Needs
         concern :>> stakeholderNeeds {
             doc
-            /* The stakeholder needs frame the problem statement. Their subject
-             * is the system of interest committed to in activity 2 "System
-             * Idea". */
+            /* The stakeholder needs frame the problem statement. Activity 2
+             * "System Idea" gave their subject its type; activity 3 binds it to
+             * the specification system. */
 
             subject :>> brownfieldSystem = deskCoolingIdeaContext.deskCoolingSystem;
             frame problemStatement :>> Project::stakeholderNeeds::problemStatement :> PRJ::problemStatement;
 
-            concern thermalRelief : ThermalRelief;
-            concern comfortWithoutAttention : ComfortWithoutAttention;
-            concern simpleUseAndControl : SimpleUseAndControl;
-            concern undisturbedSharedWorkspace : UndisturbedSharedWorkspace;
-            concern privacyOfPeopleNearby : PrivacyOfPeopleNearby;
-            concern safeNearbyUse : SafeNearbyUse;
-            concern fitsOrdinaryWorkplaces : FitsOrdinaryWorkplaces;
+            concern thermalRelief : ThermalRelief {
+                subject :>> systemOfInterest :> deskCoolingContext.deskCoolingSystem;
+            }
+            concern comfortWithoutAttention : ComfortWithoutAttention {
+                subject :>> systemOfInterest :> deskCoolingContext.deskCoolingSystem;
+            }
+            concern simpleUseAndControl : SimpleUseAndControl {
+                subject :>> systemOfInterest :> deskCoolingContext.deskCoolingSystem;
+            }
+            concern undisturbedSharedWorkspace : UndisturbedSharedWorkspace {
+                subject :>> systemOfInterest :> deskCoolingContext.deskCoolingSystem;
+            }
+            concern privacyOfPeopleNearby : PrivacyOfPeopleNearby {
+                subject :>> systemOfInterest :> deskCoolingContext.deskCoolingSystem;
+            }
+            concern safeNearbyUse : SafeNearbyUse {
+                subject :>> systemOfInterest :> deskCoolingContext.deskCoolingSystem;
+            }
+            concern fitsOrdinaryWorkplaces : FitsOrdinaryWorkplaces {
+                subject :>> systemOfInterest :> deskCoolingContext.deskCoolingSystem;
+            }
         }
 
         //------------------------- System Idea
@@ -73,6 +88,15 @@ package <DCD> DeskCooling {
 
                 satisfy PRJ::problemStatement;
             }
+        }
+
+        //------------------------- Specification Context and Use Cases
+        part deskCoolingContext :>> specificationContext : DCD_CONTEXT::DeskCoolingSystemContext :> deskCoolingIdeaContext {
+            doc
+            /* The specification context. It specializes the system idea context
+             * and owns the system use cases. */
+
+            part deskCoolingSystem :>> deskCoolingSystem, deskCoolingIdeaContext::deskCoolingSystem, Project::specificationContext::soi;
         }
     }
 }

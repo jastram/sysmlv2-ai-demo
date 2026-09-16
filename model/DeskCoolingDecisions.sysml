@@ -8,12 +8,19 @@ package <DCD_DECISIONS> DeskCoolingDecisions {
      * control. Each record annotates the model element it produced or that
      * relies on it, so that neither can be read without the other.
      *
+     * Each decision is linked by a dependency to the stakeholder needs it
+     * serves, and to any assumption it rests on. The dependency runs from the
+     * dependent element to what it rests on, so that following it answers
+     * "why is this so?" and following it backwards answers "what breaks if
+     * this changes?".
+     *
      * Identifiers are assigned once and are never reused. A decision that no
      * longer holds is marked superseded rather than deleted.
      * See method/00-development-process.md, section "Decisions and Assumptions".
      */
 
     private import ScalarValues::String;
+    private import DCD_STAKEHOLDERNEEDS::*;
 
     //------------------------- Record types
 
@@ -91,5 +98,42 @@ package <DCD_DECISIONS> DeskCoolingDecisions {
         id = "A-02";
         rationale = "Moving unconditioned room air over a person relieves the sensation of being too warm at the temperatures that occur at an ordinary workplace.";
         consequence = "If the room air is too warm for air movement alone to give relief, decision D-02 fails, no amount of airflow satisfies the thermal relief need, and a cooling mechanism that lowers the air temperature is required instead.";
+    }
+
+    //------------------------- What the decisions serve
+
+    dependency d01MotivatedBy from d01 to ThermalRelief, UndisturbedSharedWorkspace, FitsOrdinaryWorkplaces {
+        doc
+        /* D-01 serves the desk worker's need for relief while leaving the
+           office neighbor's conditions alone, at an ordinary workplace. If any
+           of these needs changes, the choice of a single-workplace device is
+           reopened. */
+    }
+
+    dependency d02MotivatedBy from d02 to ThermalRelief, ComfortWithoutAttention, UndisturbedSharedWorkspace {
+        doc
+        /* D-02 serves relief that needs no attention from the desk worker and
+           adds nothing to a shared room. The rejected alternatives each fail one
+           of these needs. */
+    }
+
+    dependency d03MotivatedBy from d03 to FitsOrdinaryWorkplaces, ComfortWithoutAttention {
+        doc
+        /* D-03 serves use at an ordinary workplace without preparation, and
+           without a charging routine for the desk worker to maintain. */
+    }
+
+    //------------------------- What the decisions rest on
+
+    dependency d02RestsOn from d02 to a02 {
+        doc
+        /* D-02 is valid only while air movement alone gives relief at workplace
+           temperatures. */
+    }
+
+    dependency d03RestsOn from d03 to a01 {
+        doc
+        /* D-03 is valid only while the intended workplaces provide a spare,
+           powered USB host port. */
     }
 }

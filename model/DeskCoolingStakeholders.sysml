@@ -14,9 +14,9 @@ package <DCD_STAKEHOLDERS> DeskCoolingStakeholders {
          * cooling effect directly and is the reason the system exists. Source of
          * the comfort, usability, and privacy needs. */
 
-        attribute :>> risk = LevelKind::critical;
-        attribute :>> effort = LevelKind::low;
-        attribute :>> categories = StakeholderCategoryKind::user;
+        attribute risk :>> risk = LevelKind::critical;
+        attribute effort :>> effort = LevelKind::low;
+        attribute categories :>> categories = StakeholderCategoryKind::user;
     }
 
     #extendedStakeholder part def OfficeNeighbor {
@@ -26,9 +26,9 @@ package <DCD_STAKEHOLDERS> DeskCoolingStakeholders {
          * oppose those of the desk worker. Source of the needs that limit the
          * effect of the system on its surroundings. */
 
-        attribute :>> risk = LevelKind::medium;
-        attribute :>> effort = LevelKind::medium;
-        attribute :>> categories = StakeholderCategoryKind::other;
+        attribute risk :>> risk = LevelKind::medium;
+        attribute effort :>> effort = LevelKind::medium;
+        attribute categories :>> categories = StakeholderCategoryKind::other;
     }
 
     #extendedStakeholder part def ProductManager {
@@ -37,9 +37,9 @@ package <DCD_STAKEHOLDERS> DeskCoolingStakeholders {
          * between the desk worker and the office neighbor. Source of the needs
          * concerning the intended market. */
 
-        attribute :>> risk = LevelKind::high;
-        attribute :>> effort = LevelKind::low;
-        attribute :>> categories = StakeholderCategoryKind::requirementOwner;
+        attribute risk :>> risk = LevelKind::high;
+        attribute effort :>> effort = LevelKind::low;
+        attribute categories :>> categories = StakeholderCategoryKind::requirementOwner;
     }
 }
 
@@ -66,7 +66,7 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
 
         stakeholder deskWorker : DeskWorker;
 
-        attribute :>> priority = LevelKind::critical;
+        attribute priority :>> priority = LevelKind::critical;
     }
 
     #extendedConcern concern def ComfortWithoutAttention {
@@ -79,7 +79,7 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
 
         stakeholder deskWorker : DeskWorker;
 
-        attribute :>> priority = LevelKind::high;
+        attribute priority :>> priority = LevelKind::high;
     }
 
     #extendedConcern concern def SimpleUseAndControl {
@@ -92,7 +92,7 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
 
         stakeholder deskWorker : DeskWorker;
 
-        attribute :>> priority = LevelKind::medium;
+        attribute priority :>> priority = LevelKind::medium;
     }
 
     #extendedConcern concern def UndisturbedSharedWorkspace {
@@ -105,7 +105,7 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
 
         stakeholder officeNeighbor : OfficeNeighbor;
 
-        attribute :>> priority = LevelKind::high;
+        attribute priority :>> priority = LevelKind::high;
     }
 
     #extendedConcern concern def PrivacyOfPeopleNearby {
@@ -119,7 +119,7 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
         stakeholder deskWorker : DeskWorker;
         stakeholder officeNeighbor : OfficeNeighbor;
 
-        attribute :>> priority = LevelKind::high;
+        attribute priority :>> priority = LevelKind::high;
     }
 
     #extendedConcern concern def SafeNearbyUse {
@@ -132,7 +132,7 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
         stakeholder deskWorker : DeskWorker;
         stakeholder officeNeighbor : OfficeNeighbor;
 
-        attribute :>> priority = LevelKind::critical;
+        attribute priority :>> priority = LevelKind::critical;
     }
 
     #extendedConcern concern def FitsOrdinaryWorkplaces {
@@ -145,6 +145,6 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
 
         stakeholder productManager : ProductManager;
 
-        attribute :>> priority = LevelKind::high;
+        attribute priority :>> priority = LevelKind::high;
     }
 }

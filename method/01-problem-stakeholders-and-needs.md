@@ -104,9 +104,9 @@ Define each stakeholder using `ExtendedStakeholder` and add it to `projectStakeh
 #extendedStakeholder part def DeskWorker {
     doc /* ... */
 
-    attribute :>> risk = LevelKind::high;
-    attribute :>> effort = LevelKind::low;
-    attribute :>> categories = StakeholderCategoryKind::user;
+    attribute risk :>> risk = LevelKind::high;
+    attribute effort :>> effort = LevelKind::low;
+    attribute categories :>> categories = StakeholderCategoryKind::user;
 }
 ```
 
@@ -138,7 +138,7 @@ Define each need using `ExtendedConcern`, include the need sentence as documenta
 
     stakeholder <role> : <StakeholderDefinition>;
 
-    attribute :>> priority = LevelKind::<level>;
+    attribute priority :>> priority = LevelKind::<level>;
 }
 ```
 

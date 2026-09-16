@@ -72,13 +72,15 @@ A decision states:
 
 Attach the decision to the element it produced: the system of interest if it determines what the system is, the actor if it is what puts that actor at the boundary.
 
+Trace it to the stakeholder needs it serves, and to any assumption it rests on. The `rationale` explains the trace in prose; the dependency makes it checkable. A decision that traces to no need is a decision nobody asked for, and is either unnecessary or the sign of a need that activity 1 missed.
+
 A decision whose rejected alternatives cannot be named is not a decision of this activity. Either it was already fixed by the project frame, or it is a solution detail belonging to activity 5.
 
 ## Assumptions
 
 Record what the commitment relies on and the project does not control: properties of the workplace, of the actors, and of what they supply.
 
-An assumption states what follows if it is false. Attach it to the element that relies on it.
+An assumption states what follows if it is false. Attach it to the element that relies on it, and let the decisions that rest on it depend on it.
 
 Assumptions are not requirements. A requirement is something the system must achieve; an assumption is something the system is entitled to rely on. From activity 4 on, an assumption that a requirement depends on is additionally formalized as an `assume constraint` of that requirement.
 
@@ -141,12 +143,18 @@ metadata <id> : Decision about <Element> {
     rationale = "...";
     alternatives = "...";
 }
+
+dependency <id>MotivatedBy from <id> to <NeedDefinition>, <NeedDefinition>;
+dependency <id>RestsOn from <id> to <assumptionId>;
 ```
 
-Annotating from outside keeps the records in one register that can be read and rendered on its own, while the `about` relationship still attaches each record to its element.
+Annotating from outside keeps the records in one register that can be read and rendered on its own, while the `about` relationship still attaches each record to its element. A metadata usage is an ordinary named element, so it can be the end of a dependency like anything else.
+
+The dependencies point at the need *definitions* rather than the need usages in the project. Each need has exactly one usage, and keeping the register independent of the project keeps the decisions readable on their own.
 
 ```text
 Source: OMG SysML v2 Specification, Section 7.24 "Metadata"
+Source: OMG SysML v2 Specification, Section 7.5 "Dependencies"
 Source: SYSMOD.sysml, metadata ... about ..., as used by the AI metadata
 ```
 
@@ -209,6 +217,8 @@ At the end of this activity:
 * the system of interest satisfies the problem statement;
 * every external entity that interacts with the system is an actor, and each is connected to the system by an interface;
 * every actor that exists because of a decision is annotated with that decision;
+* every decision traces to at least one stakeholder need, and to every assumption it rests on;
+* every assumption is depended on by at least one decision, or is documented as standing on its own;
 * every `#User` actor names the stakeholder it corresponds to;
 * every decision names its rejected alternatives and is attached to the element it produced;
 * every assumption states the consequence of being false and is attached to the element that relies on it;

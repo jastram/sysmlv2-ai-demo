@@ -22,7 +22,11 @@ STAKEHOLDER_PARAM = re.compile(r"stakeholder\s+\w+\s*:\s*([\w:]+)\s*;")
 
 def enum_values(body, attribute):
     """Return the enum literals assigned to a redefined attribute."""
-    pattern = r"attribute\s*:>>\s*" + attribute + r"\s*=\s*\w+::(\w+)\s*;"
+    pattern = (
+        r"attribute\s*(?:" + attribute + r"\s+)?:>>\s*"
+        + attribute
+        + r"\s*=\s*\w+::(\w+)\s*;"
+    )
     return re.findall(pattern, body)
 
 

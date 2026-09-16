@@ -77,12 +77,36 @@ A decision names the alternatives it rejected. A record without rejected alterna
 
 An assumption states what follows if it turns out to be false. From activity 4 on, an assumption that a requirement depends on is additionally formalized as an `assume constraint` of that requirement. Until then it is documented.
 
-Both are modeled as metadata annotating the element, defined in [`../model/DeskCoolingDecisions.sysml`](../model/DeskCoolingDecisions.sysml). Identifiers are `D-nn` and `A-nn` and are never reused. A decision that no longer holds is marked `superseded` and kept rather than deleted.
+Both are traced by dependencies, in addition to annotating their element:
+
+| From | To | Meaning |
+| ---- | -- | ------- |
+| A decision | The stakeholder needs it serves | The decision exists to serve these; if they change, it is reopened |
+| A decision | The assumptions it rests on | The decision holds only while these hold |
+
+The dependency always runs from the dependent element to what it rests on. Following it forwards answers "why is this so?"; following it backwards answers "what breaks if this changes?". A decision that traces to no need is a decision nobody asked for.
+
+Both are modeled as metadata annotating the element, with plain SysML v2 dependencies for the traces, in [`../model/DeskCoolingDecisions.sysml`](../model/DeskCoolingDecisions.sysml). Identifiers are `D-nn` and `A-nn` and are never reused. A decision that no longer holds is marked `superseded` and kept rather than deleted.
 
 ```text
 Source: The SysML v2 Book, Section 14.1, on recording architecture and technology decisions
 Source: OMG SysML v2 Specification, Section 7.21.2, on assumed constraints of requirements
+Source: OMG SysML v2 Specification, Section 7.5 "Dependencies"
 ```
+
+## Modeling Conventions
+
+**Named redefinitions.**
+A redefinition that supplies a value or a body — an attribute value, a constraint — is given a name, repeating the name of the feature it redefines:
+
+```sysml
+attribute risk :>> risk = LevelKind::high;
+constraint precondition :>> precondition { doc /* ... */ }
+```
+
+SysML v2 also allows the shorter anonymous form, `attribute :>> risk = ...`, which SYSMOD and the standard library both use. It leaves the usage without a name of its own. A tool that needs a label then has only the implicit base feature to fall back on, so several attributes redefined in the same element all render as `dataValues`, and a precondition and a postcondition both render as `constraintChecks` — indistinguishable in any generated view. Naming the redefinition costs one word and removes the ambiguity.
+
+The convention applies where a value or a body is supplied. Structural redefinitions that carry their own declaration, such as a redefined port or part, already have a name or are unique within their element, and are left in the short form.
 
 ## Tailoring Decisions
 

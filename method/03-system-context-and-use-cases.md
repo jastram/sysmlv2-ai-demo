@@ -73,7 +73,7 @@ Source: SYSMOD.sysml, projectStakeholdersAI validation_prompt, which states the
 
 ## Interactions
 
-Every actor exchanges something with the system across the boundary. Model each exchange as a port on the actor, a port on the system of interest, and an interface connecting them.
+Every actor exchanges something with the system across the boundary. Activity 2 established the ports and the interfaces; this activity says what crosses them, by redefining the system's ports with the items they carry.
 
 Describe what crosses the boundary at the level of the problem: an effect, an item, or information. Do not describe the mechanism that carries it.
 
@@ -113,6 +113,23 @@ Source: SYSMOD.sysml, SystemUseCase and ConstrainedOccurrence
 
 Name a use case after the result, as a verb phrase: `ProvideRelief`, not `ReliefFunction`.
 
+### Flows
+
+Each use case records the sequence in which its exchanges happen, as an ordered flow of black-box actions of the system.
+
+A flow states **what the system does, observed from outside**. It does not state how the system does it. `deliverRelief` is a black-box behavior; `spinRotor` is not, and neither is anything a decision of activity 2 has not fixed.
+
+The actor's steps do not appear as actions. An actor's part in the interaction is visible in two places already: the `ucTrigger` says what the actor does to start it, and the `in` items of each action say what the actor supplies. Modeling the actor's steps as well would double the elements and require behaviors on actors that this project does not otherwise need.
+
+```text
+Source: SYSMOD for SysML v2, examples/DeliveryDroneSystemSpecification.sysml,
+        whose use case flows subset actions of the black-box specification system
+```
+
+A flow stops where the use case's result is achieved. A step that is the trigger of another use case belongs to that use case, not to this one. Where one use case leaves the system in the state another requires, the postcondition of the first and the precondition of the second say so; no relationship between the use cases is modeled.
+
+Keep a flow to a handful of steps. A flow long enough to need structuring is describing internal behavior, which belongs to activity 5.
+
 Keep the set small, about five at most. A use case that no actor cares about is a system function, not a use case, and belongs to activity 5.
 
 Each use case identifies the stakeholder needs it addresses. A need that no use case addresses is either satisfied by a property of the system rather than by an interaction, or the set of use cases is incomplete.
@@ -123,25 +140,22 @@ The activity produces one system context definition, one black-box definition of
 
 ### System Context
 
-Define the context with `#systemContext` as a specialization of the system idea context of activity 2. It provides the inherited `soi`, `actors`, `asis`, and `useCases` features, and the actors and interfaces already fixed by the system idea.
+Define the context with `#systemContext` as a specialization of the system idea context of activity 2. The actors and the interfaces are inherited; only the system of interest is redefined, and the use case usages are added.
 
 ```sysml
 #systemContext part def DeskCoolingSystemContext :> DCD_IDEA::DeskCoolingSystemIdeaContext {
     #System part deskCoolingSystem :>> DCD_IDEA::DeskCoolingSystemIdeaContext::deskCoolingSystem : DeskCoolingSystem;
 
-    #User part deskWorker :> actors {
-        doc /* ... Corresponds to the DeskWorker stakeholder. */
-        port <name>;
-    }
-    #EnvironmentalEffect part workplaceEnvironment :> actors { port <name>; }
-    #ExternalSystem part <name> :> actors { port <name>; }
-
-    interface <name> :> asis connect <actor>.<port> to deskCoolingSystem.<port>;
+    use case <name> : UseCases::<UseCaseName> :> useCases { /* ... */ }
 }
 
 part def DeskCoolingSystem :> DCD_IDEA::DeskCoolingSystem {
     doc /* Black-box definition of the system of interest at specification level. */
-    port <name>;
+
+    port :>> <portName> {
+        out item <name> : <ItemDefinition>;
+        in item <name> : <ItemDefinition>;
+    }
 }
 ```
 
@@ -159,19 +173,36 @@ Define each use case with `#systemUseCase`, in a `UseCases` package next to the 
 #systemUseCase use case def <UseCaseName> {
     subject deskCoolingSystem : DeskCoolingSystem;
 
-    actor <role> : <ActorDefinition>;
+    actor <role>;
 
     objective {
         doc /* <what the use case achieves> */
         frame concern <needName> : <NeedDefinition>;
     }
 
-    attribute :>> ucMotivation = "...";
-    attribute :>> ucTrigger = "...";
-    attribute :>> ucResult = "...";
+    attribute ucMotivation :>> ucMotivation = "...";
+    attribute ucTrigger :>> ucTrigger = "...";
+    attribute ucResult :>> ucResult = "...";
 
-    constraint :>> precondition { doc /* ... */ }
-    constraint :>> postcondition { doc /* ... */ }
+    constraint precondition :>> precondition { doc /* ... */ }
+    constraint postcondition :>> postcondition { doc /* ... */ }
+
+    action <name> :> deskCoolingSystem.<name>;
+
+    first start then <name>;
+    first <name> then done;
+}
+```
+
+The actions of the flow subset black-box actions declared on the system of interest, so that the same behavior used by two use cases is one element:
+
+```sysml
+part def DeskCoolingSystem :> DCD_IDEA::DeskCoolingSystem {
+    action <name> {
+        doc /* <what the system does, observed from outside> */
+        in item <name> : <ItemDefinition>;
+        out item <name> : <ItemDefinition>;
+    }
 }
 ```
 
@@ -180,7 +211,7 @@ The subject and the actors are parameters of the use case definition. The contex
 ```sysml
 use case <name> : UseCases::<UseCaseName> :> useCases {
     subject :>> deskCoolingSystem :> DeskCoolingSystemContext::deskCoolingSystem;
-    actor :>> <role> :> <actor>;
+    actor :>> <role> :> DeskCoolingSystemContext::<actor>;
 }
 ```
 
@@ -231,12 +262,17 @@ Source: 00-development-process.md, tailoring decisions "Project frame is given" 
 **Black box only.**
 This activity produces only the black-box context. The white-box `specificationContextImpl` is developed in activity 5, where internal structure is decided.
 
-**No use case flows.**
-SYSMOD and the SysML v2 Book both show use cases with an internal flow of actions performed by the subject. Those actions describe how the system produces the result and are therefore decisions about internal behavior, which this activity does not take. At this stage a use case is specified textually: objective, motivation, trigger, result, precondition, and postcondition. Activity 5 may add flows by specializing the use cases once the behavior of the system is decided.
+**Black-box flows, no actor actions.**
+An earlier version of this guidance omitted use case flows entirely, on the grounds that the actions in the SYSMOD example describe internal behavior. That was wrong: those actions are declared on the black-box specification system, not on its implementation, and they state what the system does rather than how. Flows are therefore developed here, restricted to black-box actions of the system, with the actors' steps left to the trigger and the items.
+
+Writing the flows is also what finds missing exchanges. The interface between the system and the desk worker gained the `ServiceIndication` item only because the flow of `PutIntoService` had no way to tell the desk worker that the system was ready.
 
 ```text
+Source: SYSMOD for SysML v2, examples/DeliveryDroneSystemSpecification.sysml
 Source: The SysML v2 Book, Section 33.1, on realizing use case events by system and actor behaviors
 ```
+
+Activity 5 refines these flows once internal structure exists, by allocating each black-box action to the parts that perform it.
 
 **Explicit need links.**
 Each use case frames the needs it addresses as concerns of its objective. This makes the link from needs to required interactions checkable in the model rather than only in prose. It follows the explicit-stakeholder-link decision of activity 1.
@@ -248,8 +284,17 @@ Source: OMG SysML v2 Specification, Section 7.21.3 "Concern Definitions and Usag
 **No domain library.**
 The SYSMOD delivery-drone example maintains a separate domain library of shared items. For this small product, items that cross the system boundary are defined next to the context. A domain library is introduced only if items become shared between artifacts.
 
+**Untyped actor parameters.**
+The actors of activity 2 are untyped part usages, following the SYSMOD delivery-drone example, so there is no actor definition for a use case parameter to be typed by. The parameters are declared untyped and given their value by subsetting the context's actor. The SYSMOD example goes further and declares no actor parameters at all; this project keeps them, because a use case that cannot name its actors cannot be checked against the rule that every use case has one.
+
+**Items on the system side only.**
+What crosses an interface is declared on the system's ports. The actors' ports are left bare. For this product, declaring the same items a second time on the actor would state nothing new and would double the work of every later change.
+
 **No include use cases.**
 Use cases are kept independent. Shared behavior is factored out only if the same interaction genuinely appears in more than one use case.
+
+**Needs without use cases documented in the use case package.**
+A need that no interaction can address is recorded in the documentation of the use case package, with the reason, rather than left to be noticed as a gap. It becomes a system requirement in activity 4.
 
 ## Traceability
 
@@ -260,6 +305,8 @@ At the end of this activity:
 * every `#User` actor corresponds to at least one stakeholder, and every other actor is documented as needing none;
 * every use case has the system of interest as its subject and names at least one actor;
 * every use case frames at least one stakeholder need;
+* every use case has a flow that starts at `start`, ends at `done`, and uses only black-box actions of the system;
+* every exchange a flow needs has an item on the system's ports;
 * every need is addressed by a use case, or documented as a need that no interaction can address;
 * the subject of every need is bound to the specification system;
 * no actor was added here that belongs in the system idea context;
