@@ -69,10 +69,10 @@ package <DCD_DECISIONS> DeskCoolingDecisions {
         alternatives = "Conditioning the whole room, by an air conditioner or by the building's ventilation, was rejected: it changes the conditions of everyone in the room, it cannot be installed by the user, and it is outside the intended market of an ordinary workplace.";
     }
 
-    metadata d02 : Decision about DCD_IDEA::DeskCoolingSystem {
+    metadata d02 : Decision about DCD_IDEA::DeskCoolingSystem, DCD_IDEA::DeskCoolingSystemIdeaContext::workplaceEnvironment {
         id = "D-02";
         rationale = "Relief is produced by directing a stream of the surrounding room air at the person. Air movement gives immediate perceptible relief, adds no substance to the workplace, and needs no maintenance by the user.";
-        alternatives = "Refrigerating the air was rejected as too large, too power-hungry, and too noisy for a desk. Evaporative cooling was rejected because it requires a water supply and regular refilling by the user, and it adds humidity to a shared room.";
+        alternatives = "Refrigerating the air was rejected as too large, too power-hungry, and too noisy for a desk. Evaporative cooling was rejected because it requires a water supply and regular refilling by the user, and it adds humidity to a shared room. Each rejected alternative would put a different entity at the boundary in place of the workplace environment as the source of the working fluid.";
     }
 
     metadata d03 : Decision about DCD_IDEA::DeskCoolingSystemIdeaContext::usbPowerSource {
@@ -87,7 +87,7 @@ package <DCD_DECISIONS> DeskCoolingDecisions {
         consequence = "If a spare powered USB port is not available at the intended workplaces, decision D-03 fails and the power source of the system has to be reconsidered. The system boundary changes with it.";
     }
 
-    metadata a02 : Assumption about DCD_IDEA::DeskCoolingSystem {
+    metadata a02 : Assumption about DCD_IDEA::DeskCoolingSystem, DCD_IDEA::DeskCoolingSystemIdeaContext::workplaceEnvironment {
         id = "A-02";
         rationale = "Moving unconditioned room air over a person relieves the sensation of being too warm at the temperatures that occur at an ordinary workplace.";
         consequence = "If the room air is too warm for air movement alone to give relief, decision D-02 fails, no amount of airflow satisfies the thermal relief need, and a cooling mechanism that lowers the air temperature is required instead.";

@@ -2,7 +2,7 @@
 
 Guidance for activity 3 of [`00-development-process.md`](00-development-process.md).
 
-This activity fixes the system boundary, identifies the external actors, and describes the interactions the system must support. It does not produce system requirements and does not decide how the system works internally.
+This activity details the interactions across the system boundary established in activity 2 and describes the interactions the system must support as use cases. It does not produce system requirements and does not decide how the system works internally.
 
 It is a tailored version of the SYSMOD specification context, combining the system context and the use cases into one activity.
 
@@ -22,15 +22,17 @@ Source: The SysML v2 Book, Section 14.2
 
 The system of interest is what this project develops. Everything that interacts with it and is not developed by this project is an actor.
 
-The boundary is not drawn from scratch. Activity 2 committed to a kind of solution and produced a black-box system of interest together with the actors that the commitment itself forces. This activity specializes that context: it keeps what the system idea fixed, and adds the actors and interactions that the needs require.
+The boundary is not drawn from scratch. Activity 2 committed to a kind of solution and produced a complete black-box context: the system of interest and every actor that interacts with it. This activity specializes that context and determines what actually crosses each interface.
 
-Drawing the remaining boundary is the main decision of this activity. It determines what the system is accountable for and what it may assume about its surroundings.
+Deciding what crosses the boundary is the main decision of this activity. It determines what the system is accountable for and what it may assume about its surroundings.
 
 The system of interest is modeled as a black box. It has external ports and no internal structure. Internal structure is introduced in activity 5.
 
 Name the system of interest after what it is, not after how it works. `DeskCoolingSystem` is acceptable; a name containing a mechanism is not.
 
 ## Actors
+
+The actors are established in activity 2. This section is the check that the set is right, not an invitation to start over.
 
 An actor is an external entity that interacts with the system: a person, another system, or an environmental effect.
 
@@ -48,7 +50,7 @@ Identify actors by asking:
 
 An entity that only receives an effect is still an actor. It does not have to command the system.
 
-The actors introduced by the system idea are inherited from its context and are not repeated. Adding an actor here that the system idea should have introduced means the commitment of activity 2 is incomplete; record it there instead.
+Actors are inherited from the system idea context and are not repeated. If this activity reveals an actor the system idea missed, add it there, with the decision that puts it at the boundary if one does, rather than here: the boundary belongs to one artifact.
 
 Keep the set small, about five at most. Model an actor separately only if it crosses the boundary in its own way.
 
@@ -60,10 +62,13 @@ A stakeholder holds an interest in the system. An actor occupies a role at the s
 
 Where an actor corresponds to a stakeholder from activity 1, name the stakeholder in the actor's documentation.
 
-Every actor should be covered by at least one stakeholder. An actor without a corresponding stakeholder means either that a stakeholder was overlooked in activity 1, or that the entity is not really an actor.
+Every `#User` actor should be covered by at least one stakeholder. A person at the boundary whom no stakeholder represents means either that a stakeholder was overlooked in activity 1, or that the entity is not really an actor.
+
+The converse does not hold in either direction. A `#ExternalSystem` or `#EnvironmentalEffect` actor need not correspond to a stakeholder.
 
 ```text
-Source: SYSMOD.sysml, projectStakeholdersAI validation_prompt
+Source: SYSMOD.sysml, projectStakeholdersAI validation_prompt, which states the
+        stronger rule that every actor maps to a stakeholder; the SYSMOD
 ```
 
 ## Interactions
@@ -252,12 +257,12 @@ At the end of this activity:
 
 * the system of interest is a black box with a port for every interaction across its boundary;
 * every actor is connected to the system by at least one interface;
-* every actor corresponds to at least one stakeholder, unless documented otherwise;
+* every `#User` actor corresponds to at least one stakeholder, and every other actor is documented as needing none;
 * every use case has the system of interest as its subject and names at least one actor;
 * every use case frames at least one stakeholder need;
 * every need is addressed by a use case, or documented as a need that no interaction can address;
 * the subject of every need is bound to the specification system;
-* every actor not introduced by the system idea is justified by a need or a use case;
+* no actor was added here that belongs in the system idea context;
 * no requirements or architecture elements exist yet.
 
 Requirements are derived from the needs and the use cases in activity 4.

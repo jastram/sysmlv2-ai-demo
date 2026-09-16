@@ -20,8 +20,8 @@ Source: The SysML v2 Book, Section 4.2 "Harmonic Triad of Modeling"
 | # | Activity                        | Result                                                          |
 | - | ------------------------------- | --------------------------------------------------------------- |
 | 1 | Problem, Stakeholders and Needs | The problem to be solved, the relevant stakeholders, their needs |
-| 2 | System Idea                     | The solution commitment that answers the problem                 |
-| 3 | System Context and Use Cases    | System boundary, actors, and required interactions               |
+| 2 | System Idea                     | The solution commitment, and the system boundary it establishes  |
+| 3 | System Context and Use Cases    | What crosses the boundary, and the required interactions         |
 | 4 | System Requirements             | Verifiable requirements traced to needs                          |
 | 5 | System Architecture             | Behavior and structure that satisfy the requirements             |
 | 6 | Verification and Validation     | Evidence that requirements are met and needs are addressed       |

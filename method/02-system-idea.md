@@ -36,13 +36,26 @@ Source: SYSMOD.sysml, systemIdeaContextAI validation_prompt, on premature archit
 
 Name the system of interest after what it is for, not after how it works, as in activity 3. The mechanism belongs in the documentation and in the decisions, not in the name; the name survives a change of mechanism.
 
-## Actors Introduced by the Commitment
+## Actors
 
-A commitment puts entities at the system boundary that the problem alone does not imply. Model those actors here, and only those.
+The system idea context is the first context of the chain, because this project develops no brownfield context. It therefore has to be complete in itself: it contains every external entity that interacts with the system, not only the ones the commitment introduced.
 
-An actor belongs in this activity if removing the commitment would remove the actor. Every other actor is identified in activity 3.
+```text
+Source: 00-development-process.md, tailoring decision "No brownfield context"
+```
 
-This is the load-bearing output of the activity: it is what makes the context of activity 3 derivable rather than invented.
+Actors come from two places, and both belong here:
+
+| Origin | Example | Recorded as |
+| ------ | ------- | ----------- |
+| Implied by the problem | The person the system serves | An actor, no decision needed |
+| Introduced by the commitment | The power source a powered device needs | An actor, annotated with the decision that introduced it |
+
+Which of the two an actor is does not depend on which activity wrote it down. It is visible from whether a decision annotates it: an actor carrying a decision disappears if that decision is reversed, an actor without one does not. The decision records carry the attribution, so establishing the whole boundary here loses nothing.
+
+This is the load-bearing output of the activity. Activity 3 details what crosses each interface and derives the use cases; it does not have to invent the boundary.
+
+Keep the set small, about five at most. An entity that exchanges nothing with the system is not an actor, and an entity affected only through another actor is not one either.
 
 ## Decisions
 
@@ -85,10 +98,15 @@ Define the context with `#systemContext`, which makes it a `SystemContext` and p
 #systemContext part def DeskCoolingSystemIdeaContext {
     #System part deskCoolingSystem : DeskCoolingSystem :>> soi;
 
+    #User part <name> :> actors {
+        doc /* ... Corresponds to the <name> stakeholder of activity 1. */
+        port <name>;
+    }
     #ExternalSystem part <name> :> actors {
         doc /* ... Present as an actor because of decision D-nn. */
         port <name>;
     }
+    #EnvironmentalEffect part <name> :> actors { port <name>; }
 
     interface <name> :> asis connect <actor>.<port> to deskCoolingSystem.<port>;
 }
@@ -100,7 +118,7 @@ part def DeskCoolingSystem {
 ```
 
 ```text
-Source: SYSMOD.sysml, SystemContext, System, ExternalSystem
+Source: SYSMOD.sysml, SystemContext, System, User, ExternalSystem, EnvironmentalEffect
 Source: SYSMOD for SysML v2, examples/DeliveryDroneSystemIdea.sysml
 ```
 
@@ -177,8 +195,8 @@ SYSMOD develops the system idea as both a black-box context and a white-box `sys
 **No brownfield context.**
 See the tailoring decision of the same name in [`00-development-process.md`](00-development-process.md). The system idea context does not specialize a brownfield context.
 
-**Minimal actor set.**
-Only actors forced by the commitment are modeled here. SYSMOD permits the system idea to add actors freely; keeping the set minimal keeps the split between this activity and activity 3 checkable.
+**Complete context.**
+SYSMOD's system idea context is complete because it specializes the brownfield context and inherits the actors that already exist. This project has no brownfield context, so the system idea context has nothing to inherit and establishes the complete boundary itself.
 
 **Decisions and assumptions modeled, not written as prose files.**
 The model is the single source of truth for this repository, so records live in the model and can be rendered from it, rather than in separate decision-record documents.
@@ -189,10 +207,12 @@ At the end of this activity:
 
 * a system idea context exists with the system of interest as a black box;
 * the system of interest satisfies the problem statement;
-* every actor in the context is there because of a recorded decision;
+* every external entity that interacts with the system is an actor, and each is connected to the system by an interface;
+* every actor that exists because of a decision is annotated with that decision;
+* every `#User` actor names the stakeholder it corresponds to;
 * every decision names its rejected alternatives and is attached to the element it produced;
 * every assumption states the consequence of being false and is attached to the element that relies on it;
 * the subject of the problem statement and of the needs is determined;
 * no use cases, requirements, or internal structure exist yet.
 
-Activity 3 specializes this context into the specification context and adds the remaining actors and the use cases.
+Activity 3 specializes this context into the specification context, details what crosses each interface, and adds the use cases.
