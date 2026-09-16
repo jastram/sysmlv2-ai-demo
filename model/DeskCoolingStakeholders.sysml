@@ -2,8 +2,8 @@ package <DCD_STAKEHOLDERS> DeskCoolingStakeholders {
     doc
     /* Stakeholders of the intelligent desk cooling device.
      *
-     * Result of activity 1 "Stakeholders and Needs".
-     * See method/02-stakeholders-and-needs.md.
+     * Result of activity 1 "Problem, Stakeholders and Needs".
+     * See method/02-problem-stakeholders-and-needs.md.
      */
 
     private import SYSMOD::*;
@@ -47,10 +47,11 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
     doc
     /* Stakeholder needs of the intelligent desk cooling device.
      *
-     * Result of activity 1 "Stakeholders and Needs".
+     * Result of activity 1 "Problem, Stakeholders and Needs".
      * Needs describe desired outcomes, not solutions. They are not yet
-     * verifiable, and their subject is declared but not yet determined.
-     * See method/02-stakeholders-and-needs.md.
+     * verifiable. Activity 2 "System Idea" gave their subject its type;
+     * activity 3 gives it its value.
+     * See method/02-problem-stakeholders-and-needs.md.
      */
 
     private import SYSMOD::*;
@@ -61,7 +62,7 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
         /* The desk worker needs relief from feeling too warm at their workplace
          * so that they can keep working comfortably. */
 
-        subject systemOfInterest;
+        subject systemOfInterest : DCD_IDEA::DeskCoolingSystem;
 
         stakeholder deskWorker : DeskWorker;
 
@@ -74,7 +75,7 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
          * change posture at their desk so that they do not have to interrupt
          * their work to maintain it. */
 
-        subject systemOfInterest;
+        subject systemOfInterest : DCD_IDEA::DeskCoolingSystem;
 
         stakeholder deskWorker : DeskWorker;
 
@@ -87,7 +88,7 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
          * that they can obtain their preferred level of relief without
          * distracting from their work. */
 
-        subject systemOfInterest;
+        subject systemOfInterest : DCD_IDEA::DeskCoolingSystem;
 
         stakeholder deskWorker : DeskWorker;
 
@@ -100,7 +101,7 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
          * conditions so that another person's comfort does not reduce their
          * own. */
 
-        subject systemOfInterest;
+        subject systemOfInterest : DCD_IDEA::DeskCoolingSystem;
 
         stakeholder officeNeighbor : OfficeNeighbor;
 
@@ -113,7 +114,7 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
          * their workplace private so that they can work with a sense of
          * privacy. */
 
-        subject systemOfInterest;
+        subject systemOfInterest : DCD_IDEA::DeskCoolingSystem;
 
         stakeholder deskWorker : DeskWorker;
         stakeholder officeNeighbor : OfficeNeighbor;
@@ -126,7 +127,7 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
         /* People near the system need it to operate without causing harm during
          * normal prolonged use. */
 
-        subject systemOfInterest;
+        subject systemOfInterest : DCD_IDEA::DeskCoolingSystem;
 
         stakeholder deskWorker : DeskWorker;
         stakeholder officeNeighbor : OfficeNeighbor;
@@ -140,7 +141,7 @@ package <DCD_STAKEHOLDERNEEDS> DeskCoolingStakeholderNeeds {
          * and workplaces without preparation or modification so that it serves
          * the intended market. */
 
-        subject systemOfInterest;
+        subject systemOfInterest : DCD_IDEA::DeskCoolingSystem;
 
         stakeholder productManager : ProductManager;
 

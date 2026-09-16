@@ -6,7 +6,7 @@ writes a generated view; it never modifies the model.
 
 This is deliberately not a SysML v2 parser. It recognises exactly the modeling
 conventions used in this repository, as described in
-method/02-stakeholders-and-needs.md:
+method/02-problem-stakeholders-and-needs.md:
 
     #extendedStakeholder part def <StakeholderName> {
         doc

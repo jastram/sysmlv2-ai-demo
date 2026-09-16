@@ -9,18 +9,20 @@ systems engineering with SysML v2 and Syside.
 
 ## Project Frame
 
-The product is a small intelligent desktop cooling device. Its purpose is
-to provide cooling to a person working at a desk and to adapt the airflow
-to the person's position.
+The product provides relief to a person who is too warm at their desk,
+without changing the conditions of the room around them.
 
 The project is a greenfield development and serves as an educational
 demonstrator. The model is intentionally small and follows the KISS
 principle.
 
-The development starts from stakeholder needs and must not assume a
-specific technical solution. A fan, camera, sensors, motors, or other
-implementation technologies are possible later design choices, not part
-of the initial problem definition.
+The development starts from the problem and the stakeholder needs. It does
+not assume a technical solution: the kind of solution is committed to in
+activity 2 of [`method/01-development-process.md`](method/01-development-process.md),
+as an explicit and recorded decision, because the system boundary cannot be
+drawn without one. That commitment is a USB-powered tabletop fan. Everything
+inside it — how the airflow is produced, directed, and controlled — remains a
+later design choice.
 
 Regulatory engineering and product certification are outside the scope
 of this demonstration.

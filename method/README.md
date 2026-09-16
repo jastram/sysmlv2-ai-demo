@@ -10,7 +10,7 @@ The method is intentionally developed incrementally. It should contain only guid
 
 The method is derived from external reference material. The reference library is maintained separately from this repository.
 
-The available sources and their versions are documented in [`../references.md`](../references.md).
+The available sources and their versions are documented in [`../references/README.md`](../references/README.md).
 
 Different sources have different authority:
 
